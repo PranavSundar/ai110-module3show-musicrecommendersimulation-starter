@@ -9,11 +9,12 @@ You will implement the functions in recommender.py:
 - recommend_songs
 """
 
-from recommender import load_songs, recommend_songs
+from src.recommender import load_songs, recommend_songs
 
 
 def main() -> None:
     songs = load_songs("data/songs.csv") 
+    print(f"Loaded songs: {len(songs)}")
 
     # Starter example profile
     user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
@@ -21,12 +22,21 @@ def main() -> None:
     recommendations = recommend_songs(user_prefs, songs, k=5)
 
     print("\nTop recommendations:\n")
-    for rec in recommendations:
-        # You decide the structure of each returned item.
-        # A common pattern is: (song, score, explanation)
-        song, score, explanation = rec
-        print(f"{song['title']} - Score: {score:.2f}")
-        print(f"Because: {explanation}")
+    if not recommendations:
+        print("(no recommendations)")
+        return
+
+    # Simple, readable CLI layout
+    title_width = max(len(song["title"]) for song, _score, _exp in recommendations)
+    artist_width = max(len(song["artist"]) for song, _score, _exp in recommendations)
+
+    header = f"{'TITLE'.ljust(title_width)}  {'ARTIST'.ljust(artist_width)}  SCORE"
+    print(header)
+    print("-" * len(header))
+
+    for song, score, explanation in recommendations:
+        print(f"{song['title'].ljust(title_width)}  {song['artist'].ljust(artist_width)}  {score:>5.2f}")
+        print(f"  reasons: {explanation}")
         print()
 
 

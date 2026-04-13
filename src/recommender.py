@@ -123,9 +123,10 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     reasons: List[str] = []
 
     # Categorical matches
+    # Data experiment: halve genre weight from 2.0 -> 1.0 to reduce over-dominance.
     if user_prefs.get("genre") is not None and song.get("genre") == user_prefs.get("genre"):
-        score += 2.0
-        reasons.append("genre match (+2.0)")
+        score += 1.0
+        reasons.append("genre match (+1.0)")
 
     if user_prefs.get("mood") is not None and song.get("mood") == user_prefs.get("mood"):
         score += 1.5
@@ -141,7 +142,8 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
             score += points
             reasons.append(f"{feature} close (+{points:.2f})")
 
-    closeness("energy", 1.0)
+    # Data experiment: double energy weight from 1.0 -> 2.0.
+    closeness("energy", 2.0)
     closeness("valence", 0.8)
     closeness("danceability", 0.6)
     closeness("acousticness", 0.6)

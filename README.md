@@ -123,6 +123,21 @@ Use this section to document the experiments you ran. For example:
 - What happened when you added tempo or valence to the score
 - How did your system behave for different types of users
 
+### CLI Output Screenshots (System Evaluation)
+
+- High-Energy Pop
+  ![High-Energy Pop CLI output](assets/recommender-cli-high-energy-pop.png)
+- Chill Lofi
+  ![Chill Lofi CLI output](assets/recommender-cli-chill-lofi.png)
+- Deep Intense Rock
+  ![Deep Intense Rock CLI output](assets/recommender-deep-intense-rock.png)
+- Conflicting Sad + Max Energy (adversarial)
+  ![Conflicting profile CLI output](assets/recommender-conflicting-sad-high-energy.png)
+- Numeric-Only Profile (no genre/mood anchor)
+  ![Numeric-only profile CLI output](assets/recommender-cli-numeric-only.png)
+
+> Note: take one terminal screenshot per profile run and save each image to the matching `assets/` filename above.
+
 ---
 
 ## Limitations and Risks
